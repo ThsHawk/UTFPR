@@ -12,18 +12,22 @@ def getRegN(fileName):
     regN = regN[1]
     return regN
 
-def genKeyList(fileName):
-    regN = getRegN(fileName)
-    for i in range(1, regN):
-        line = readRrn(filename, i)
-        line = line.split("|")
-        line[0] = line[0].split(" ")
-        print(line[0])
-        str = ""
-        for j in range(len(line[0])):
-            str = str + line[0][j]
-        line = str.upper() + line[4]
+def genKey(line, tkn):
+    line = line.split(tkn)
+    line[0] = line[0].split(" ")
+    key = ""
+    for j in range(len(line[0])):
+        key = key + line[0][j]
+    line = key.upper() + line[4]
+    return line
 
+def genKeyList(fileName):
+    regN = int(getRegN(fileName))
+    keyList = []
+    for i in range(1, regN):
+        line = (genKey(readRrn(fileName, i), '|'), i-1)
+        keyList.append(line)
+    return keyList
 
 def readRrn(fileName, rrn):
     file = openFile(fileName)
@@ -42,7 +46,8 @@ def openFile(fileName):
         return file
 
 def main():
-    genKeyList(sys.argv[1])
+    keyList = genKeyList(sys.argv[1])
+    print(keyList)
 
 
 if len(sys.argv) == 5:
