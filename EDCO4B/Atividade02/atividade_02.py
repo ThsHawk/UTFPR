@@ -42,15 +42,15 @@ def genKey(line, tkn):
     key = ""
     for j in range(len(line[0])):
         key = key + line[0][j]
-    line = key.upper() + line[4]
-    return line
+    key = key.upper() + line[4]
+    return key
 
 def genKeyList(fileName):
     regN = int(getRegN(fileName))
     keyList = []
     for i in range(1, regN + 1):
-        line = (genKey(readRrn(fileName, i), '|'), i-1)
-        keyList.append(line)
+        tup = (genKey(readRrn(fileName, i), '|'), i-1)
+        keyList.append(tup)
     return keyList
 
 def readRrn(fileName, rrn):
@@ -75,6 +75,8 @@ def readOps(fileName):
     file.close()
     for i in range(len(lines)):
         lines[i] = lines[i].split(", ")
+        tmp = lines[i][1].split("\n")
+        lines[i][1] = tmp[0]
     return lines
 
 def searchRecord(array, key): #peguei da net pq eu tbm sou filho de Deus (mas modifiquei pra ser tupla)
@@ -92,6 +94,11 @@ def searchRecord(array, key): #peguei da net pq eu tbm sou filho de Deus (mas mo
 				first = mid + 1	
 	return (False, -1, -1)
 
+def header(regN, top):
+    headerLine = "REG.N=" + str(regN) + " TOP=" + str(top)
+    headerLine = addEmptyCharLine(headerLine)
+    return headerLine
+
 def delRecord(fileName, array, key):
     searchResult = searchRecord(array, key)
     if searchResult[0]:
@@ -99,17 +106,15 @@ def delRecord(fileName, array, key):
         regN = int(getRegN(fileName))-1
         top = getTOP(fileName)
         file.close()
-        defRecord = "REG.N=" + str(regN) + " TOP=" + str(searchResult[1])
-        defRecord = addEmptyCharLine(defRecord)
         file = open(fileName, "r+")
         file.seek(0, 0)
-        file.write(defRecord)
+        file.write(header(regN, searchResult[1]))
         file.seek((searchResult[1]+1)*LINE_OFFSET, 0)
         file.write("*" + top + "|")
         file.close()
         array.pop(searchResult[2])
     else:
-        print("Record not found")
+        print("Record \"" + key + "\" not found")
 
 def insertRecord(fileName, array, line):
     searchResult = searchRecord(array, genKey(line, ","))
@@ -117,25 +122,52 @@ def insertRecord(fileName, array, line):
         print("Record already exists")
     else:
         top = int(getTOP(fileName))
+        regN = int(getRegN(fileName))
+        file = open(fileName, "r+")
         if top != -1:
-            file = open(fileName, "r+")
             file.seek((top+1)*LINE_OFFSET, 0)
-            string = file.readline()
-            string = string.split("|")
-            string = string[0][1:]
-            newTOP = int(string)
-            print(newTOP)
-            print(line)
+            newTop = file.readline(LINE_LENTH)
+            newTop = newTop.split("|")
+            newTop = newTop[0][1:]
+            file.seek(0, 0)
+            file.write(header(regN+1, newTop))
+            file.seek((int(top)+1)*LINE_OFFSET, 0)
+            tup = (genKey(line, ","), top)
+        else:
+            file.seek(0, 0)
+            file.write(header(regN+1, top))
+            file.seek((regN+1)*LINE_OFFSET)
+            tup = (genKey(line, ","), regN)
+        file.write(newRecord(line))
+        file.close()
+        array.append(tup)
+        array.sort()
 
-
+def newRecord(line):
+    line = line.split(",")
+    newLine = ""
+    for i in range(len(line)):
+        newLine = newLine + line[i]
+        if i == 8:
+            newLine = newLine.split("\n")
+            newLine = addEmptyCharLine(newLine[0])
+            return newLine
+        else:
+            newLine = newLine + "|"
+    print("Record must have 9 fields")
+    exit()
 
 def main():
     keyList = genKeyList(sys.argv[1])
     keyList.sort()
     opsList = readOps(sys.argv[2])
-    insertRecord(sys.argv[1], keyList, opsList[0][1])
-    #delRecord(sys.argv[1], keyList, "HALO32007")
-
+    for i in range(len(opsList)):
+        if opsList[i][0] == "i":
+            insertRecord(sys.argv[1], keyList, opsList[i][1])
+        elif opsList[i][0] == "d":
+            delRecord(sys.argv[1], keyList, opsList[i][1])
+        else:
+            print("Invalid option")
 
 if len(sys.argv) == 5:
     if sys.argv[2] == "--": #facilitar minha vida
