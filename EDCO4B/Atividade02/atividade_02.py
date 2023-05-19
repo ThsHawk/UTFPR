@@ -157,6 +157,14 @@ def newRecord(line):
     print("Record must have 9 fields")
     exit()
 
+def storageCompaction(fileName1, fileName2, array):
+    file = open(fileName2, "w")
+    regN = getRegN(fileName1)
+    file.write(header(regN, -1))
+    for i in range(len(array)):
+        file.write(readRrn(fileName1, array[i][1]+1) + "\n")
+    file.close()
+    
 def main():
     keyList = genKeyList(sys.argv[1])
     keyList.sort()
@@ -168,6 +176,8 @@ def main():
             delRecord(sys.argv[1], keyList, opsList[i][1])
         else:
             print("Invalid option")
+    print(keyList)
+    storageCompaction(sys.argv[1], sys.argv[3], keyList)
 
 if len(sys.argv) == 5:
     if sys.argv[2] == "--": #facilitar minha vida
