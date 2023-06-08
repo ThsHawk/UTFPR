@@ -1,0 +1,62 @@
+Arquivo:
+---
+SIZE=168 TOP=1 QTD=15
+Rocket League|Psyonix|Sports|Multiplataforma|2015|Everyone|Free|Digital|20.0
+#13|and the Blind Forest|Moon Studios GmbH|Platform Adventure|Multiplataforma|2015|Everyone|59.00|Digital|11.00
+Bloons TD 6|Ninja Kiwi|Estrategia|Multiplataforma|2018|10+||Digital|0.2048
+Halo 3|343 Industries|FPS|Multiplataforma|2007|Mature 17+|49.00|Ambos|11.0
+#12|phemous|Team17|Metroidvania|Multiplataforma|2019|Mature+18|57.99|Digital|0.85388
+PAYDAY 2|OVERKILL - a Starbreeze Studio|RPG|Multiplataforma|2013|Mature 17+|11.99|Ambos|81.49
+Celeste|Extremely OK Games|Adventure|Multiplataforma|2018|Everyone|36.99|Digital|1.2
+Hollow Knight|Team Cherry|Metroidvania|Multiplataforma|2017|Everyone 10+|24.97|Digital|5.3
+Final Fantasy XV|Square Enix|Action RPG|Multiplataforma|2016|Teen|125.00|Ambos|100.0
+The Witcher 3 - Wild Hunt|CD Projekt|Action RPG|Multiplataforma|2015|Mature 17+|79.90|Ambos|32.0
+The Legend of Zelda: Breath of the Wild|Nintendo|Action-adventure|Switch|2017|Everyone 10+|199.90|Ambos|13.4
+Halo 5: Guardians|343 Industries|FPS|Xbox One/Series|2015|Teen|99.00|Ambos|60.0
+#17|Binding of Isaac: Rebirth|Nicalis|Roguelike|PC|2014|Mature 17+|27.99|Digital|0.449
+#4|al Fantasy VII Remake|Square Enix|Action RPG|Multiplataforma|2020|Teen|349.00|Ambos|100.0
+Squad|Offworld Industries|Indie|PC|2020|Mature 17+|70.49|Digital|74.15
+Devil May Cry 5|Capcom|Hack and Slash|Multiplataforma|2019|Mature 17+|99.90|Ambos|35.0
+Fallout 4|Bethesda Game Studios|RPG|Multiplataforma|2015|Mature 17+|59.99|Ambos|36.23
+#-1|mon Emerald|Nintendo|RPG de turno|GBA|2004|Everyone|34.99|Ambos|0.016
+Halo Infinite|343 Industries|FPS|Multiplataforma|2021|14+|130.00|Ambos|48.42
+Arma 3|Bohemia Interactive|Simulacao|PC|2013|Mature 17+|29.99|Digital|40.57
+---
+
+Tabela de Indice Primário:
+---
+ARMA32013, 19
+BLOONSTD62018, 2
+CELESTE2018, 6
+DEVILMAYCRY52019, 15
+FALLOUT42015, 16
+FINALFANTASYXY2016, 8
+HALO32007, 3
+HALO5:GUARDIANS2015, 11
+HALOINFINITE2021, 18
+HOLLOWKNIGHT2017, 7
+PAYDAY22013, 5
+ROCKETLEAGUE2015, 0
+SQUAD2020, 14
+THELEGENDOFZELDA:BREATHOFTHEWILD2017, 10
+THEWITCHER3-WILDHUNT2015, 9
+---
+
+Tabela de Indice Secundário
+---
+343INDUSTRIES, HALO32007
+343INDUSTRIES, HALO5:GUARDIANS2015
+343INDUSTRIES, HALOINFINITE2021
+BETHESDA, FALLOUT42015
+BOHEMIAINTERACTIVE, ARMA32013
+CAPCOM, DEVILMAYCRY52019
+CDPROJECT, THEWITCHER3-WILDHUNT2015
+EXTREMELYOKGAMES, CELESTE2018
+NINJAKIWI, BLOONSTD62018
+NINTENDO, THELEGENDOFZELDA:BREATHOFTHEWILD2017
+OFFWORLDINDUSTRIES, SQUAD2020
+OVERKILL-ASTARBREEZESTUDIO, PAYDAY22013
+PSYONIX, ROCKETLEAGUE2015
+SQUEAREENIX, FINALFANTASYXY2016
+TEAMCHERRY, HOLLOWKNIGHT2017
+---
