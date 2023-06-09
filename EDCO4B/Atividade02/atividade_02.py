@@ -6,7 +6,7 @@ LINE_LENTH = 168
 import sys
 
 def addEmptyCharLine(line):
-    for j in range(len(line), 168):
+    for i in range(len(line), LINE_LENTH):
         line = line + " "
     return line + "\n"
 
