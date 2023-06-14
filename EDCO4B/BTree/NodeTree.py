@@ -1,6 +1,7 @@
 class NodeTree:    
     
     def __init__(self, leaf = False):
+        self.__father = None
         self.__keys = list()
         self.__refs = list()
         self.__isLeaf = leaf
@@ -17,3 +18,6 @@ class NodeTree:
 
     def getRefs(self):
         return(self.__refs)
+    
+    def getFather(self):
+        return self.__father
