@@ -4,10 +4,7 @@ class NodeTree:
     __keys = list()
     __refs = list()
     __isLeaf = False
-    __count = 0
-
-    def __init__(self) -> None:
-        pass    
+    __count = 0  
 
     def insert(self, key):
         if not Utils.binarySearch(self.__keys, key):
