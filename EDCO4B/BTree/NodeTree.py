@@ -1,9 +1,18 @@
-class NodeTree:
+import Utils
+class NodeTree:    
     
-    
-    def __init__(self):
-        
-        __keys = list()
-        __refs = list()
-        __isLeaf = False
-        __count = 0
+    __keys = list()
+    __refs = list()
+    __isLeaf = False
+    __count = 0
+
+    def __init__(self) -> None:
+        pass    
+
+    def insert(self, key):
+        if not Utils.binarySearch(self.__keys, key):
+            self.__keys.append(key)
+            self.__keys.sort()
+            self.__count += 1
+        else:
+            print("already exists")

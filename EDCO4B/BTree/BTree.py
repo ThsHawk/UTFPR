@@ -1,35 +1,27 @@
+import NodeTree
 class BTree:
     
+    __degree = 0
+    __root = None
     
-    def __init__(self):
-        
-        __degree = 0
-        __root = None
+    def __init__(self) -> None:
+        pass
     
     def search(self, key):
-        if this.__root == None:
+        if self.__root == None:
             return None
         else:
-            searchNode(this.__root, key)
+            self.searchNode(self.__root, key)
             
     def searchNode(self, node, key):
-        first = 0
-        last = len(node.__keys)-1
-        found = False
-        while first<=last:
-            mid = (first + last)//2
-            if array[mid][0] == key :
-                return (True, array[mid][1], mid)
-            else:
-                if key < array[mid][0]:
-                    last = mid - 1
-                else:
-                    first = mid + 1	
-        return (False, -1, -1)
+        print("")
+
     
     def insert(self, key):
-        if this.__root == None:
-            this.__root = KnotTree()
-            this.__root.insert(key)
-        else:
-            this.__root
+        if self.__root == None:
+            self.__root = NodeTree()
+            self.__root.__isLeaf = True
+            self.__root.insert(key)
+        elif self.__root.__isLeaf == True:
+            self.__root.insert(key)
+        
