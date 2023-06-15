@@ -10,6 +10,17 @@ class Tree:
     def getRoot(self):
         return self.__root
 
+    def refSearch(self, array, key):
+        first = 0
+        last = len(array)-1
+        while first <= last:
+            mid = (first + last)//2
+            if key < array[mid]:
+                last = mid - 1
+            else:
+                first = mid + 1	
+        return first
+    
     def search(self, node, key):
         if node.isLeaf():
             if key in node.getKeys():
@@ -32,16 +43,16 @@ class Tree:
     
     def insert(self, node, key):
         if node.isLeaf():
-            if not(key in node.getKeys()):
+            if key not in node.getKeys():
                 node.getKeys().append(key)
                 node.getKeys().sort()
             else:
                 print("already exists")
         else:
-            refIndex = Utils.binarySearch(node.getKeys(), key)
-            self.insert(node.getKeys()[refIndex], key)
+            refIndex = self.refSearch(node.getKeys(), key)
+            self.insert(node.getRefs()[refIndex], key)
         if len(node.getKeys()) == self.__degree:
-            self.splitNode(node)
+            self.split(node)
 
     def split(self, node):
         mid = self.__degree // 2
@@ -50,14 +61,22 @@ class Tree:
         leftNode = NodeTree(True)
         if father == None:
             father = NodeTree()
-            father.__keys.append(node.getKeys()[mid])
+            father.getKeys().append(node.getKeys()[mid])
+            rightNode.getKeys().extend(node.getKeys()[mid+1:])
+            leftNode.getKeys().extend(node.getKeys()[:mid])
+            father.getRefs().append(leftNode)
+            father.getRefs().append(rightNode)
+            self.__root = father
+            
+
             
 
     def printTree(self, node = None):
-        if self.__root.isLeaf():
-            print("leaf: " + str(self.__root.getKeys()))
+        if node == None: node = self.__root
+        if node.isLeaf():
+            print("leaf: " + str(node.getKeys()))
         else:
-            refs = self.__root.getRefs()
+            refs = node.getRefs()
             for i in range(len(refs)):
                 self.printTree(refs[i])
-            print("node: " + self.__root.getKeys())
+            print("node: " + str(node.getKeys()))
