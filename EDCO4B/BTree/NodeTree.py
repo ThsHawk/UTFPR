@@ -21,3 +21,6 @@ class NodeTree:
     
     def getFather(self):
         return self.__father
+    
+    def setFather(self, node):
+        self.__father = node

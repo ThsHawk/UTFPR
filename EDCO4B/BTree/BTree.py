@@ -21,29 +21,22 @@ class Tree:
                 first = mid + 1	
         return first
     
-    def search(self, node, key):
+    def search(self, node=None, key=None):
+        if node == None: node = self.__root
         if node.isLeaf():
             if key in node.getKeys():
                 print(":)")
-            
+            else:
+                print(":(")
         else:
-            first = 0
-            last = len(node.getKeys())-1
-            while first < last:
-                mid = (first + last)//2
-                if key < node.getKeys()[mid]:
-                    last = mid - 1
-                else:
-                    first = mid + 1
+            refIndex = self.refSearch(node.getKeys(), key)
             refs = node.getRefs()
-            self.search(refs[mid])
-            
-    def searchNode(self, node, key):
-        print("")
+            self.search(refs[refIndex], key)
     
-    def insert(self, node, key):
+    def insert(self, node = None, key = None):
+        if node == None: node = self.__root
         if node.isLeaf():
-            if key not in node.getKeys():
+            if key not in node.getKeys() and key != None:
                 node.getKeys().append(key)
                 node.getKeys().sort()
             else:
@@ -57,26 +50,35 @@ class Tree:
     def split(self, node):
         mid = self.__degree // 2
         father = node.getFather()
-        rightNode = NodeTree(True)
-        leftNode = NodeTree(True)
+        leaf = True if node.getRefs() == [] else False
+        rightNode = NodeTree(leaf)
+        rightNode.getKeys().extend(node.getKeys()[mid+1:])
+        rightNode.getRefs().extend(node.getRefs()[mid+1:])
+        leftNode = NodeTree(leaf)
+        leftNode.getKeys().extend(node.getKeys()[:mid])
+        leftNode.getRefs().extend(node.getRefs()[:mid+1])
         if father == None:
             father = NodeTree()
             father.getKeys().append(node.getKeys()[mid])
-            rightNode.getKeys().extend(node.getKeys()[mid+1:])
-            leftNode.getKeys().extend(node.getKeys()[:mid])
             father.getRefs().append(leftNode)
             father.getRefs().append(rightNode)
             self.__root = father
-            
+        else:
+            refIndex = self.refSearch(father.getKeys(), node.getKeys()[mid])
+            father.getRefs().pop(refIndex)
+            father.getRefs().insert(refIndex, leftNode)
+            father.getRefs().insert(refIndex+1, rightNode)
+            father.getKeys().append(node.getKeys()[mid])
+            father.getKeys().sort()
+        rightNode.setFather(father)
+        leftNode.setFather(father)
 
-            
-
-    def printTree(self, node = None):
+    def printTree(self, node = None, iterator = 0):
         if node == None: node = self.__root
         if node.isLeaf():
-            print("leaf: " + str(node.getKeys()))
+            print("leaf[" + str(iterator) + "]: " + str(node.getKeys()))
         else:
             refs = node.getRefs()
             for i in range(len(refs)):
-                self.printTree(refs[i])
-            print("node: " + str(node.getKeys()))
+                self.printTree(refs[i], i)
+            print("node[" + str(iterator) + "]: " + str(node.getKeys()))
