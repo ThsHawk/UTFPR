@@ -1,5 +1,4 @@
 from NodeTree import *
-from Utils import *
 
 class Tree:    
     
@@ -25,9 +24,9 @@ class Tree:
         if node == None: node = self.__root
         if node.isLeaf():
             if key in node.getKeys():
-                print(":)")
+                print("key \'" + str(key) + "\'is in tree")
             else:
-                print(":(")
+                print("key \'" + str(key) + "\'is not in tree")
         else:
             refIndex = self.refSearch(node.getKeys(), key)
             refs = node.getRefs()
@@ -40,7 +39,7 @@ class Tree:
                 node.getKeys().append(key)
                 node.getKeys().sort()
             else:
-                print("already exists")
+                print("key \'" + str(key) + "\'already exists")
         else:
             refIndex = self.refSearch(node.getKeys(), key)
             self.insert(node.getRefs()[refIndex], key)
