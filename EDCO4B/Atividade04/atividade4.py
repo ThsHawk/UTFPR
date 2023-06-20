@@ -100,7 +100,7 @@ def searchSecndKey(Array, secKey):
     for i in range(len(Array)):
         if Array[i][0] == secKey:
             listIdx.append(i)
-    return listIdx
+    return listIdx if listIdx != [] else -1
 
 def sortAux(a):
     return a[0]
@@ -108,20 +108,34 @@ def sortAux(a):
 def main():
     primaryKeyList = genKeyList(sys.argv[1])
     primaryKeyList.sort(key=sortAux)
-    secKey = "ano"
-    secondKeyList = genSecKeyList(sys.argv[1], primaryKeyList, SECND_INDEX.index(secKey))
-    listaFF = searchSecndKey(secondKeyList, "1995")
-    file = openFile(sys.argv[2], "w")
-    for i in range(len(listaFF)):
-        
+    file = openFile(sys.argv[2], 'r')
+    lines = file.readlines()
+    if len(lines) == 2:
+        lines[0] = lines[0].strip()
+        lines[1] = lines[1].strip()
+    else:
+        print("invalid input file: \'" + sys.argv[2] + "\'")
+        exit()
+    try:
+        secIndex = SECND_INDEX.index(lines[0])
+    except ValueError:
+        print("this script dont handle any field \'" + lines[0] + "\', try one of these instead: " + str(SECND_INDEX))
+        exit()
+    else:
+        secondKeyList = genSecKeyList(sys.argv[1], primaryKeyList, secIndex)
+    index = searchSecndKey(secondKeyList, lines[1])
+    file = openFile(sys.argv[3], "w")
+    if index != -1:
+        for i in range(len(index)):
+            file.write(readRrn(sys.argv[1], int(primaryKeyList[index[i]][1])+1))
+    else:
+        file.write("search for \'" + lines[1] + "\' on \'" + lines[0] + "\' in \'" + sys.argv[1] + "\' did not found any record")
+    file.close()        
 
 if sys.argv[2] == "--": #usado somente para formatar os arquivos de entrada (Registros de tamanho fixo)
     addEmptyCharFile(sys.argv[1]) 
-    exit()    
-elif len(sys.argv) == 4 and sys.argv[3] == "key": #gera o arquivo de indice primario
-    file = openFile(sys.argv)
-
-elif len(sys.argv) == 5:
+    exit()
+elif len(sys.argv) == 4:
     main()
 else:
     print("invalid argument")
