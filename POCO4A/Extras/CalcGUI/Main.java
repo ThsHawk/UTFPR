@@ -1,6 +1,7 @@
 package POCO4A.Extras.CalcGUI;
 
-import javax.swing.*;        
+import javax.swing.*;
+import POCO4A.Extras.CalcGUI.graphic.*;       
 
 public class Main {
     /**
@@ -11,11 +12,14 @@ public class Main {
     private static void createAndShowGUI() {
         //Create and set up the window.
         JFrame frame = new JFrame("CalcGUI");
+        frame.setSize(400, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Add the button w/ "Hello" label.
-        JButton testButton = new JButton("Hello");
-        frame.getContentPane().add(testButton);
+        Button one = new Button("1");
+
+        //frame.getContentPane().add(testButton1);
+        frame.setContentPane(one);
 
         //Display the window.
         frame.pack();
