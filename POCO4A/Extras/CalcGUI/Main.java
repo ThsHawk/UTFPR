@@ -1,55 +1,56 @@
 package POCO4A.Extras.CalcGUI;
 
-import java.awt.Component;
 import java.awt.Container;
-import java.awt.FlowLayout;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
  
 public class Main {
     public static void addComponentsToPane(Container pane) {
-        pane.setLayout(null);
- 
-        //addATextDisplay("teste", pane);
+        pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
+        addATextDisplay("teste", pane);
         addANumPad(pane);
-
     }
     
     private static void addANumPad(Container container){
         JPanel numPad = new JPanel(new GridLayout(4, 4));
-        addAButton("Button 1", numPad);
-        addAButton("Button 2", numPad);
-        addAButton("Button 3", numPad);
-        addAButton("Long-Named Button 4", numPad);
+        numPad.setMaximumSize(new Dimension(400, 400));
+        addAButton("7", numPad);
+        addAButton("8", numPad);
+        addAButton("9", numPad);
+        addAButton("+", numPad);
+        addAButton("4", numPad);
         addAButton("5", numPad);
-        container.add(numPad);
-        
+        addAButton("6", numPad);
+        addAButton("-", numPad);
+        addAButton("1", numPad);
+        addAButton("2", numPad);
+        addAButton("3", numPad);
+        addAButton("/", numPad);
+        addAButton("0", numPad);
+        addAButton(",", numPad);
+        addAButton("=", numPad);
+        addAButton("*", numPad);
+        container.add(numPad);  
     }
     
     private static void addAButton(String text, Container container) {
         JButton button = new JButton(text);
-        button.setSize(50, 50);
-        //button.setAlignmentX(Component.CENTER_ALIGNMENT);
         container.add(button);
     }
 
     private static void addATextDisplay(String text, Container container){
-        JTextField tf = new JTextField(text, 20);
-        tf.setSize(250, 100);
-        tf.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JLabel tf = new JLabel(text, JLabel.CENTER);
+        tf.setFont(new Font("nome", Font.BOLD, 38));
+        tf.setMaximumSize(new Dimension(400, 100));
         container.add(tf);
     }
- 
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event-dispatching thread.
-     */
+
     private static void createAndShowGUI() {
         //Create and set up the window.
         JFrame frame = new JFrame("CalcGUI");
@@ -61,7 +62,6 @@ public class Main {
         addComponentsToPane(frame.getContentPane());
  
         //Display the window.
-        //frame.pack();
         frame.setVisible(true);
     }
  
