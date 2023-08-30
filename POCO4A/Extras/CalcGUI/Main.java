@@ -3,6 +3,8 @@ package POCO4A.Extras.CalcGUI;
 import javax.swing.*;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.*;
 import POCO4A.Extras.CalcGUI.graphic.*;       
 
@@ -18,22 +20,27 @@ public class Main {
     private static void createAndShowGUI() {
         //Create and set up the window.
         JFrame frame = new JFrame("CalcGUI");
+        frame.setLayout(new GridLayout(2, 1));
         frame.setSize(400, 500);
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        //Separador
+        JPanel display = new JPanel();
+        display.setLayout(new BorderLayout(100, 100));
+        display.setBackground(Color.RED);
+        JTextField tf = new JTextField(var);
+        tf.setSize(250, 70);
+        display.add(tf, BorderLayout.CENTER);
         //teste label
-        final JTextField tf = new JTextField(var);
-        tf.setSize(100, 100);
+        frame.add(display, BorderLayout.NORTH);
+        
         
         //Add the button w/ "Hello" label.
-        
-        NumPad np = new NumPad();
 
 
         //frame.getContentPane().add(testButton1);
         //frame.getContentPane().add(tf, BorderLayout.LINE_START);
-        frame.getContentPane().add(np, BorderLayout.LINE_END);
-        frame.setLayout(null);
 
         //Display the window.
         frame.setVisible(true);
