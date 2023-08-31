@@ -15,30 +15,24 @@ OBS: RA não pode ser  uma string
 int main()
 {
 
-    //int inteiro;
+    long int inteiro;
     char * msg = (char *) malloc(20*sizeof(char));
 
+    //Teste read/write
     read(0, msg, 20);
-    //write(1, "Alou Syscall!\n\n",15);
-
     write(1, msg, 20);
    
-    /*//para os alunos estudarem os tamanhos dos tipos de dados pedir nome
+    //para os alunos estudarem os tamanhos dos tipos de dados pedir nome
     //e RA por exemplo
-    read(0, &inteiro , 0);
-    read(0, msg , 20);
+    write(1, "Digite seu primeiro nome: ", 26);
+    read(0, msg, 15);
+    write(1, "Digite seu RA: ", 15);
+    read(0, &inteiro, 7);
 
-    write(1, "\n\n",2);    
-    
-    write(1, &inteiro, 4);    
-    
-    write(1, "\n\n",2);
-    write(1, msg, 20);
-*/
-    write(1, "\n\n",2);    
-    char c;
-    while (read(0, c, sizeof(char)) > 0);
-    //msg = "teste";
-    read(0, msg, 20);
-    write(1, msg, 20);
+    //Print
+    write(1, "\n\n", 2);    
+    write(1, "Nome: ", 6);    
+    write(1, msg, 15);    
+    write(1, "RA: ", 4);    
+    write(1, &inteiro, 7);   
 }
