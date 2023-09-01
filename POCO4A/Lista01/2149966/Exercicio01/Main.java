@@ -8,9 +8,11 @@ package Exercicio01;
 
 public class Main {
 
-    private EmpresaViagem empresa;
+    private static EmpresaViagem empresa;
 
     public static void main(String[] args) {
+
+        empresa =  new EmpresaViagem();
         
     }
     
