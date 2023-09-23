@@ -1,10 +1,10 @@
 /*
-Exercicio 6
+Exercicio 9
 Autor: Thales Alves 
 Data: 31/08/23
 */
 
-package Exercicio06;
+package Exercicio09;
 
 public class Time {
     
