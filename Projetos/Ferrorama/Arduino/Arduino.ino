@@ -9,12 +9,20 @@
 Servo servo;
 
 void control_gate(uint8_t sensor_pin){
-  bool gate_flag = false, led_state = false;
-  servo.write(160);
+  bool gate_flag = false, led_state = true;
   digitalWrite(pin_GREEN, LOW);
+  
+  for (size_t i = 0; i < 4; i++){
+    digitalWrite(pin_YELLOW, led_state);
+    delay(200);
+    led_state = !led_state;
+  }
+  
+  servo.write(160);
+  
   digitalWrite(pin_RED, HIGH);
   uint16_t gate_count = 0, led_count = 0;
-  while(gate_count < 2000){
+  while(gate_count < 300){
     uint16_t sensor_read = analogRead(sensor_pin);
     delay(1);
     if(sensor_read < 200){
@@ -30,7 +38,7 @@ void control_gate(uint8_t sensor_pin){
       led_count = 0;
       led_state = !led_state;
     }
-    digitalWrite(pin_YELLOW, led_state);
+    //digitalWrite(pin_YELLOW, led_state);
   }
   digitalWrite(pin_RED, LOW);
   digitalWrite(pin_YELLOW, LOW);
