@@ -1,0 +1,12 @@
+            Aplicações
+                |   Bibliotecas
+                |   |   |
+            API (POSIX) |
+                |       |
+        Chamadas de Sistemas
+                |
+       Sistemas Operacionais
+                |
+           ISA - Assembly
+                |
+             Hardware
