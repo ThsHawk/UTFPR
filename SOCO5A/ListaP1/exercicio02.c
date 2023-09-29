@@ -50,12 +50,12 @@ int count;
 
 void ctrlC(int signum){
     count++;
-    if(count = 3){
+    if(count == 3){
         write(1, "Deseja sair?\n", 13);
-        alarm(20)
-        char opt;
+        alarm(20);
+        char *opt = (char *)malloc(1 * sizeof(char));
         read(0, opt, 1);
-        if(opt == 'y'){
+        if(*opt == 'y'){
             exit(0);
         }else{
             count = 0;
@@ -65,12 +65,16 @@ void ctrlC(int signum){
 
 void ctrlZ(int signum){
     write(1, "CTRL-C pressionado ", 19);
-    write(1, count, 1);
-    write(1, " vezes.\n", 8)
+    char c = count + '0';
+    write(1, &c, 1);
+    write(1, " vezes.\n", 8);
 }
 
-void alarm(int signum){
-    if(count == 3)exit(0);
+void alarme(int signum){
+    if(count == 3){
+        write(1, "Saindo...", 9);
+        exit(0);
+    }
 }
 
 int main(){
