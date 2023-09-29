@@ -8,6 +8,6 @@
 #include <sys/wait.h>
 
 int main(){
-    execv("/bin", "ps -aux");
+    execl("/bin/ps", "-aux", NULL);
     return 0;
 }
