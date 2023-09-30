@@ -4,6 +4,9 @@
 #define sensor_01_echo  9
 #define sensor_02_trig  10
 #define sensor_02_echo  11
+#define pin_RED         6
+#define pin_YELLOW      5
+#define pin_GREEN       4
 #define servo_pin       2
 Servo servo;
 
@@ -14,15 +17,18 @@ void pulse(uint8_t pin){
 }
 
 void control_gate(bool pin){
+    digitalWrite(pin_GREEN, LOW);
     bool gate_flag = false, led_state = true;
 
     for (size_t i = 0; i < 4; i++){
-        //digitalWrite(pin_YELLOW, led_state);
+        digitalWrite(pin_YELLOW, led_state);
         delay(200);
         led_state = !led_state;
     }
 
     servo.write(160);
+    delay(10);
+    digitalWrite(pin_RED, HIGH);
 
     uint16_t gate_count = 0;
     while (gate_count < 700){
@@ -35,6 +41,8 @@ void control_gate(bool pin){
         }
         if (dist > 5.0 && gate_flag)gate_count++;
     }
+    digitalWrite(pin_YELLOW, LOW);
+    digitalWrite(pin_RED, LOW);
 }
 
 void setup(){
@@ -45,6 +53,10 @@ void setup(){
     digitalWrite(sensor_02_trig, LOW);
     pinMode(sensor_02_echo, INPUT);
 
+    pinMode(pin_RED, OUTPUT);
+    pinMode(pin_YELLOW, OUTPUT);
+    pinMode(pin_GREEN, OUTPUT);
+    
     servo.attach(servo_pin);
     servo.write(100);
 
@@ -62,6 +74,8 @@ void loop(){
         control_gate(false);
     }else{
         servo.write(100);
+        delay(10);
+        digitalWrite(pin_GREEN, HIGH);
     }
     delay(1);
 }
