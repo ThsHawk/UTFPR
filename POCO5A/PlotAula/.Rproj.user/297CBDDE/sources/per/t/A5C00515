@@ -1,0 +1,32 @@
+{
+    "id": "A5C00515",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1599446627945.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "expression": "resistance_mean",
+        "caption": "resistance_mean",
+        "totalObservations": 4,
+        "displayedObservations": 4,
+        "variables": 1,
+        "cacheKey": "774A73FF",
+        "object": "resistance_mean",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=resistance_mean&cache_key=774A73FF&max_cols=50",
+        "preview": 0
+    },
+    "folds": "",
+    "lastKnownWriteTime": 94168255661640,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1599446627945,
+    "read_only": false,
+    "read_only_alternatives": []
+}

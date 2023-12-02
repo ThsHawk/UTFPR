@@ -1,0 +1,6 @@
+
+
+amostra=rnorm(1000,97.1,sqrt(150))
+
+var(amostra)
+mean(amostra)

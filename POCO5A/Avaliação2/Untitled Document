@@ -1,0 +1,101 @@
+1) Dado que 69 % dos produtos de uma empresa nao apresentam
+ falhas apos a producao, em uma amostra de 12 componentes, determine:
+ a)	A probabilidade de que nenhum falhe     (0.5)
+
+    dbinom(12,12,0.69) 0.01164633
+
+ b)	A probabilidade de que no minimo 1 falhe	(0.5)
+
+    1-pbinom(0,12,0.31) 0.9883537
+
+ c)	A probabilidade de que ao menos 3 falhem	(0.5)
+
+    1-pbinom(2,12,0.31) 0.7704125
+
+ d)	Se a amostra for de 50 componentes, quantos irao falhar em media? (0.5)
+
+ 
+
+ e)  Construa um grafico com todas as probabilidades (0.5)
+
+    amostra=0:12
+    probabilidade=dbinom(0:12,12,0.69)
+    dados=data.frame(amostra,probabilidade)
+    ggplot(dados,aes(x=amostra,y=probabilidade))+ geom_col()+ geom_text(aes(label=round(probabilidade,3)))
+
+2) A capacidade de processamento de um componente eletronico eh,
+ em media, de 4.1 Hz por segundo. Determine:
+ a)	A probabilidade de processar  4 ciclos  por segundo?         (0.5)
+
+    dpois(4,4.1) 0.1951267
+
+ b)	A probabilidade de processar  3 ou mais ciclos  por segundo? (0.5)
+
+    1-ppois(2,4.1) 0.776186
+
+ c)	Apresente graficamente a maior parte das probabilidades      (0.5)
+
+    amostra=0:8.2
+    probabilidade=dpois(0:8.2,4.1)
+    dados=data.frame(amostra,probabilidade)
+    ggplot(dados,aes(x=amostra,y=probabilidade))+ geom_col()+ geom_text(aes(label=round(probabilidade,5)))
+
+ d)  A probabilidade de processar 300 ou menos ciclos em um minuto? (0.5)
+
+    ppois(300,246) 0.9996205
+
+3) O tempo de falha de um componente eletrico segue uma distribuicao 
+exponencial com media 4.14 anos. Calcule:
+ a)	 A probabilidade da falha ocorrer apos 7 anos?  (0.5)
+
+    1-pexp(7,1/4.14) 0.184368
+
+ b)	 A probabilidade da falha ocorrer antes de 3 anos?  (0.5)
+
+    pexp(3,1/4.14) 0.5154999
+
+ c)	 A probabilidade da falha ocorrer entre 2 e 6 anos? (0.5)
+
+    pexp(6,1/4.14)-pexp(2,1/4.14) 0.3821329
+
+ d)	 Qual a variancia do tempo de falha? (formula)  (0.5)
+
+    1/(1/4.14^2) 17.1396
+
+ e)  Apresente graficamente a distribuicao de probabilidade   (0.5)
+
+    amostra=rexp(1000,4.14)
+    probabilidade=dexp(amostra,4.14)
+    dados=data.frame(amostra,probabilidade)
+    ggplot(dados,aes(amostra))+ geom_line(aes(amostra,probabilidade))
+
+4)	Seja X uma variavel aleatoria que segue distribuicao normal com media 97.1 e variancia 150. Determine:
+ a)	P(X < 115)  (0.5)
+
+    pnorm(115,97.1,sqrt(150)) 0.9280648
+
+ b)	P(85<X<110) (0.5)
+
+    pnorm(110,97.1,sqrt(150))-pnorm(85,97.1,sqrt(150)) 0.6923079
+
+ c)	P(X> 65)  (0.5)
+
+    1-pnorm(65,97.1,sqrt(150)) 0.9956158
+
+ d)	O valor de k tal que  P(X<K)=0,45	(0.5)
+
+    qnorm(0.45,97.1,sqrt(150)) 95.56097
+
+ e) Apresente graficamente a distribuicao normal (0.5)
+
+    amostra=rnorm(1000,97.1,sqrt(150))
+    probabilidade=dnorm(amostra,97.1,sqrt(150))
+    dados=data.frame(amostra,probabilidade)
+    ggplot(dados,aes(amostra))+ geom_line(aes(amostra,probabilidade))
+
+
+5) Uma amostra de tamanho 60 de uma variavel que segue uma distribuicao
+ normal foi obtida e se encontra salva no objeto "amostra"(digite amostra para ver!).
+ Determine a probabilidade de X<25 (0.5)
+
+pnorm(25,mean(amostra),sd(amostra)) 0.8494972

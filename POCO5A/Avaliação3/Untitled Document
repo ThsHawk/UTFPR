@@ -1,0 +1,25 @@
+ ex1) Construa um IC para media (1.0)
+
+    t.test(ex1, conf.level = 0.95) [21.07205, 23.44742]
+
+ ex2) Construa um IC para proporcao de sucessos (p=1 sucesso) (1.0)
+
+    prop.test(40-sum(ex2),40, conf.level = 0.95, correct = F) [0.4703244, 0.7577702]
+
+ ex3) Teste se a media eh igual ou diferente de 20 (1.0)
+
+    t.test(ex3, alternative = 'two.side', mu = 20, conf.level = 0.95) p-valor < 5%, rejeita-se H0. Verdadeira média é diferente de 20.
+
+ ex4) Teste se a proporcao de sucessos (p=1 sucesso) eh igual ou diferente de 70%. (1.0)
+
+    prop.test(sum(ex4),20, alternative = 'two.side', p = 0.7, conf.level = 0.95) p-valor < 5%, rejeita-se H0. Proporção diferente de 70%.
+
+ ex5) Teste se a media da populacao X eh igual ou diferente da de Y. Considere duas amostras independentes e variancias populacionais iguais (2.0)
+
+    
+
+ ex6) Teste se a media da populacao X eh igual ou diferente da de Y. Considere duas amostras independentes e variancias populacionais diferentes (2.0)
+
+
+
+ ex7) Teste se a media de antes eh igual ou diferente da de depois. Considere duas amostras dependentes.

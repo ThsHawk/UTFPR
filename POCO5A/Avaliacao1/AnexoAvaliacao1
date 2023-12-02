@@ -1,0 +1,99 @@
+Contem nesses dados as informacoes do tempo gasto para produzir determinado produto, qual empresa produziu, assim como o nivel de resistencia do mesmo (quanto maior o valor, mais resistente o produto).
+
+Para todas as questoes, personalize os graficos de acordo com suas preferencias e interprete os resultados.  Pede-se:
+
+ a) Construa um grafico de barras, apresentando os totais de cada tipo de    empresa; Qual(ais) empresas com maiores frequencias?
+
+ggplot(DATA,aes(x=company)) +geom_bar() +labs(title='QUANTIDADE DE EMPRESAS') + theme_bw()
+
+ b) Construa os boxplots para as resistencias considerando as diferentes empresas. Interprete
+
+ggplot(data,aes(x=company, y=yield)) +geom_boxplot()
+
+ c) Determine as medias das resistencias por empresa. Apos, represente graficamente. Qual empresa apresenta o produto mais resistente?
+
+res_mean=as.data.frame(tapply(data$yield,data$company,mean))
+res_mean$companys=labels(res_mean)[[1]]
+names(res_mean)[1]='mean'
+ggplot(res_mean,aes(x=companys))  +geom_bar(stat="identity",aes(y=mean)) +labs(title='Resistencia Media por Empresa')
+
+ d) Existe alguma relacao entre tempo x resistencia x empresa? Sabendo que iremos produzir considerando o tempo entre 15 e 17, qual a melhor empresa? Justifique graficamente (obs: tempo no eixo x)
+
+ggplot(Thales,aes(x=tempo,y=resistencia,col=empresa)) +geom_point() +labs(title='Resistencia x Tempo x Empresa')+ theme_bw()
+
+ e) Construa um grafico de mapa de arvore "treemap" considerando a area a resistencia media de cada empresa
+
+ggplot(res_media,aes(area=media,fill=empresas)) +geom_treemap() +labs(title='Resistencia Media por Empresa (TreeMap)') + theme_bw(
+
+ f) Construa um grafico animado mostrando a evolucao da resistencia ao longo do tempo por empresa. (Dica: Adicione esse comando ao final para os pontos nao apagarem:
+ +shadow_mark(past = T, future=F, alpha=0.3))
+
+
+ggplot(Thales, aes(empresa,resistencia, size = pop, color = continent)) +
+  geom_point() +  theme_bw() +
+  labs(title = 'Tempo: {frame_time}', x = 'empresa', y = 'resistencia') +
+  transition_time(tempo) 
+
+
+
+
+
+
+
+#################################################################
+#################################################################
+#################################################################
+
+
+
+
+
+
+#funcao no R
+source('https://git.io/JJ7jE')
+avaliacao1(2149966) #coloque o RA nessa funcao.
+
+# questao a
+
+ggplot(Thales,aes(x=empresa)) +geom_bar() +labs(title='Quantidade de Empresas') + theme_bw()
+
+# questao b
+
+ggplot(Thales,aes(x=empresa, y=resistencia)) +geom_boxplot() +labs(title='Resistencia de Produto') + theme_bw()
+
+# questao c
+
+res_media=as.data.frame(tapply(Thales$resistencia,Thales$empresa,mean))
+res_media$empresas=labels(res_media)[[1]]
+names(res_media)[1]='media'
+ggplot(res_media,aes(x=empresas))  +geom_bar(stat="identity",aes(y=media)) +labs(title='Resistencia Media por Empresa') + theme_bw()
+
+# questao d
+
+ggplot(Thales,aes(x=tempo,y=resistencia,col=empresa)) +geom_point() +labs(title='Resistencia x Tempo x Empresa') + theme_bw()
+
+# questao e
+
+ggplot(res_media,aes(area=media,fill=empresas)) +geom_treemap() +labs(title='Resistencia Media por Empresa (TreeMap)') + theme_bw()
+
+# questao f
+
+grafico=ggplot(Thales, aes(empresa,resistencia)) +geom_point() +labs(title = 'Tempo: {frame_time}', x = 'empresa', y = 'resistencia') + theme_bw() +transition_time(tempo)
+animate(grafico, renderer = gifski_renderer())
+
+
+
+
+
+
+
+#################################################################
+#################################################################
+#################################################################
+
+
+
+
+
+Através deste gráfico observa-se a consistência da produção de cada empresa, ou seja, apesar de a empresa S produzir produtos mais resistentes, sua produção não é homogênea. Portanto a empresa R seria mais confiável. Destaque também a empresa P que, como foi visto no gráfico anterior, tem a maior produção e consegue aliar isso a uma boa resistência, comparando com as demais. A empresa L por sua vez, tem a menor produção e seus produtos são os menos resistentes das comparadas.
+A empresa M tem uma produção parecida com a empresa R, porém a segunda tem produtos mais resistentes.
