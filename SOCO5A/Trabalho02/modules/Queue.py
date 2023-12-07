@@ -3,6 +3,7 @@
 
 from modules.Pages import Pages
 from modules.FileAccess import FileAccess
+from icecream import ic
 
 # -----------------------------------------------------------------------------------
 # -----------------------------------------------------------------------------------
@@ -30,8 +31,8 @@ class Queue():
     # ---------------------------
     def access(self, page):
         result = None
+        self.refreshCounter()
         for i in range(len(self.fifo)):
-            self.refreshCounter()
             if self.fifo[i].getAddress() == page:
                 self.fifo[i].setAccess(True)
                 result = self.fifo[i]
@@ -73,6 +74,7 @@ class Queue():
     def refreshCounter(self):
         self.accessCount += 1
         if self.accessCount == int(self.refreshRate):
+            self.accessCount = 0
             for i in range(len(self.fifo)):
                 self.fifo[i].setAccess(False)
     
