@@ -1,9 +1,9 @@
 ### Trab2 - SO
 
 To run just type:
-'''
+```
 $python main.py
-'''
+```
 on the main folder.
 The init prompt you need to specify the path of sample file ande the 'r' mode to read the file.
 
