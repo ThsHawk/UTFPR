@@ -42,8 +42,10 @@ class Options():
         return 1
     
     def auto(self):
-        page = self.file.getChar()
-        self.fifo.access(page)
+        while 1:
+            page = self.file.getChar()
+            if page == "": break
+            self.fifo.access(int(page))
 
 
     def paused(self):

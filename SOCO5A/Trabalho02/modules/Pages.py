@@ -13,7 +13,7 @@ class Pages():
     def __init__(self):
         self.address = 0
         self.payload = ""
-        self.access = False
+        self.access = True
     
     def getAddress(self):
         return self.address
