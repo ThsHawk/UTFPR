@@ -10,16 +10,22 @@ from modules.Pages import Pages
 
 class Options():
     # ---------------------------
-    # main
+    # initialize
     # ---------------------------
     def __init__(self):
         self.file = FileAccess()
         self.file.openFile()
         self.fifo = Queue()
 
+    # ---------------------------
+    # finalize
+    # ---------------------------
     def __del__(self):
         self.file.closeFile()
     
+    # ---------------------------
+    # print menu
+    # ---------------------------
     def menu(self):
         print("-- Second Chance Simulator --")
         print("01 - Automatic run")
@@ -41,6 +47,9 @@ class Options():
                 print("Err: invalid option.")
         return 1
     
+    # ---------------------------
+    # automatic run option
+    # ---------------------------
     def auto(self):
         while 1:
             page = self.file.getChar()
@@ -48,5 +57,12 @@ class Options():
             self.fifo.access(int(page))
 
 
+    # ---------------------------
+    # manual run option
+    # ---------------------------
     def paused(self):
-        return self.access
+        while 1:
+            page = self.file.getChar()
+            if page == "": break
+            self.fifo.access(int(page))
+            input("Press any to continue..")

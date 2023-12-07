@@ -3,14 +3,13 @@
 
 from modules.Pages import Pages
 from modules.FileAccess import FileAccess
-from icecream import ic
 
 # -----------------------------------------------------------------------------------
 # -----------------------------------------------------------------------------------
 
 class Queue():
     # ---------------------------
-    # main
+    # initialize
     # ---------------------------
     def __init__(self):
         self.fifo = []
@@ -20,9 +19,15 @@ class Queue():
         self.pointer = 0
         self.accessCount = 0
 
+    # ---------------------------
+    # finalize
+    # ---------------------------
     def __del__(self):
         print("Total page fault: " + str(self.pagefault))
 
+    # ---------------------------
+    # access page routine
+    # ---------------------------
     def access(self, page):
         result = None
         for i in range(len(self.fifo)):
@@ -34,6 +39,9 @@ class Queue():
         if not result: self.pageIn(page)
         self.printState()
     
+    # ---------------------------
+    # insert page routine
+    # ---------------------------
     def pageIn(self, page):
         self.pagefault += 1
         print("Err: Page fault.")
@@ -45,6 +53,9 @@ class Queue():
         self.pointer += 1
         if self.pointer == self.len: self.pointer = 0
 
+    # ---------------------------
+    # pop page routine
+    # ---------------------------
     def pageOut(self):
         while 1:
             state = self.fifo[self.pointer].getAccess()
@@ -56,12 +67,18 @@ class Queue():
                 self.fifo.pop(self.pointer)
                 break
 
+    # ---------------------------
+    # refresh bit routine
+    # ---------------------------
     def refreshCounter(self):
         self.accessCount += 1
         if self.accessCount == int(self.refreshRate):
             for i in range(len(self.fifo)):
                 self.fifo[i].setAccess(False)
     
+    # ---------------------------
+    # view page status
+    # ---------------------------
     def printState(self):
         stateList = []
         for i in range(len(self.fifo)):

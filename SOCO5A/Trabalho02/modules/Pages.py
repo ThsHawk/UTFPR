@@ -8,13 +8,16 @@
 
 class Pages():
     # ---------------------------
-    # main
+    # init
     # ---------------------------
     def __init__(self):
         self.address = 0
         self.payload = ""
         self.access = True
     
+    # ---------------------------
+    # getters and setters
+    # ---------------------------
     def getAddress(self):
         return self.address
     

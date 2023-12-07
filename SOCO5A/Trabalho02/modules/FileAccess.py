@@ -8,7 +8,7 @@
 
 class FileAccess():
     # ---------------------------
-    # main
+    # initialize
     # ---------------------------
     def __init__(self):
         self.path = input("Input file path: ")
@@ -21,6 +21,9 @@ class FileAccess():
     def setMode(self, mode):
         self.mode = mode
 
+    # ---------------------------
+    # open the file
+    # ---------------------------
     def openFile(self):
         try:
             return open(self.path, self.mode)
@@ -28,9 +31,15 @@ class FileAccess():
             print("Err: File \'" + self.path + "\' not found.")
             return -1
     
+    # ---------------------------
+    # close the file
+    # ---------------------------
     def closeFile(self):
         self.fileDescriptor.close()
 
+    # ---------------------------
+    # return one char per read
+    # ---------------------------
     def getChar(self):
         char = self.fileDescriptor.read(1)
         return char
